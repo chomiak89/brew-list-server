@@ -11,6 +11,8 @@ const userSchema = new Schema({
   },
   password: String,
   passwordVerify: String,
+  profileImage: String,
+  profileAbout: String,
 });
 
 const User = mongoose.model("User", userSchema);

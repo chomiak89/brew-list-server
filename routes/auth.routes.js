@@ -31,6 +31,9 @@ router.post("/signup", (req, res) => {
         username,
         email,
         password: bcryptjs.hashSync(password),
+        profileImage:
+          "https://img.freepik.com/free-vector/coffee-love-foam-with-beans-cartoon-icon-illustration_138676-2575.jpg?w=826&t=st=1665338734~exp=1665339334~hmac=60e007fc88da4dd3bb33eca1cca55031dfa35954b39e0bb566c365e0afba40ac",
+        profileAbout: "Write something about yourself here!",
       });
     })
     .then((createdUser) => {
@@ -78,6 +81,7 @@ router.post("/login", (req, res) => {
       const payload = {
         username: foundUser.username,
         _id: foundUser._id,
+        profileImage: foundUser.profileImage,
       };
 
       //setup the auth token

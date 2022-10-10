@@ -23,15 +23,18 @@ app.use(
 );
 
 // ℹ️ setup body parser
-app.use(express.json());
+app.use(express.json({ limit: "50mb" }));
 
 // ℹ️ Connects to the database
 require("./db");
 
 // ℹ️ Set up routes
 const authRoutes = require("./routes/auth.routes");
+const userRoutes = require("./routes/user.routes");
+const { unsubscribe } = require("./routes/auth.routes");
 
 app.use("/auth", authRoutes);
+app.use("/user", userRoutes);
 
 app.get("/", (req, res) => {
   res.send("Hello from Brew List home path!");
