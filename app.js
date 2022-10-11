@@ -31,10 +31,12 @@ require("./db");
 // ℹ️ Set up routes
 const authRoutes = require("./routes/auth.routes");
 const userRoutes = require("./routes/user.routes");
-const { unsubscribe } = require("./routes/auth.routes");
+const cafeRoutes = require("./routes/cafe.routes");
+// const { unsubscribe } = require("./routes/auth.routes");
 
 app.use("/auth", authRoutes);
 app.use("/user", userRoutes);
+app.use("/cafe", cafeRoutes);
 
 app.get("/", (req, res) => {
   res.send("Hello from Brew List home path!");
