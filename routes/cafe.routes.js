@@ -126,6 +126,7 @@ router.get("/comment/get-comments/:id", (req, res) => {
 router.get("/comment/find-user/:id", (req, res) => {
   const { id } = req.params;
   User.findById(id)
+    .populate("favorites")
     .then((foundUser) => {
       res.json(foundUser);
     })
@@ -140,6 +141,43 @@ router.delete("/comment/:id", (req, res) => {
   Comment.findByIdAndDelete(id)
     .then((deletedComment) => {
       res.json({ message: "Deleted the comment" });
+    })
+    .catch((err) => {
+      console.log(err);
+      res.json({ error: err });
+    });
+});
+//GET route to get uers comments for profile
+
+//PUT route to add cafe to favorites
+router.put("/add-favorite/:userId/:cafeId", (req, res) => {
+  const { userId, cafeId } = req.params;
+  User.findByIdAndUpdate(
+    userId,
+    { $push: { favorites: cafeId } },
+    { new: true }
+  )
+    .then((updatedFavorite) => {
+      res.json({ message: "PUT favorite worked", updatedFavorite });
+    })
+    .catch((err) => {
+      console.log(err);
+      res.json({ error: err });
+    });
+});
+//PUT route to remove cafe from favorites
+router.put("/remove-favorite/:userId/:cafeId", (req, res) => {
+  const { userId, cafeId } = req.params;
+  User.findByIdAndUpdate(
+    userId,
+    { $pull: { favorites: cafeId } },
+    { new: true }
+  )
+    .then((updatedFavorite) => {
+      res.json({
+        message: "PUT favorite worked - favorite has been removed",
+        updatedFavorite,
+      });
     })
     .catch((err) => {
       console.log(err);

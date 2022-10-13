@@ -13,6 +13,12 @@ const userSchema = new Schema({
   passwordVerify: String,
   profileImage: String,
   profileAbout: String,
+  favorites: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: "Cafe",
+    },
+  ],
 });
 
 const User = mongoose.model("User", userSchema);

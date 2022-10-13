@@ -11,7 +11,10 @@ const commentSchema = new Schema({
   commentText: String,
   date: String,
   name: String,
-  cafe: Schema.Types.ObjectId,
+  cafe: {
+    type: Schema.Types.ObjectId,
+    ref: "Cafe",
+  },
 });
 
 const Comment = mongoose.model("Comment", commentSchema);
