@@ -12,6 +12,12 @@ const cafeSchema = new Schema({
   serviceOptions: [],
   address: String,
   placeId: String,
+  comments: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: "Comment",
+    },
+  ],
 });
 
 const Cafe = mongoose.model("Cafe", cafeSchema);
